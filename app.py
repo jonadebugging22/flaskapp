@@ -3,9 +3,9 @@ from flask import Flask, request,jsonify
 from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
-pw= "ChangeME#2026"
-uri= f"mysql+pymysql://jona"
-uri+="@127.0.0.1/schooldb"
+pw= "jona123"
+uri= f"mysql+pymysql://appuser"
+uri+="@127.0.0.1/practiceTable"
 app.config["SQLALCHEMY_DATABASE_URI"] = uri
 db=SQLAlchemy(app)
 
