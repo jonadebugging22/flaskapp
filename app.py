@@ -4,7 +4,7 @@ from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
 pw= "jona123"
-uri= f"mysql+pymysql://appuser"
+uri= f"mysql+pymysql://appuser:{pw}"
 uri+="@127.0.0.1/practiceTable"
 app.config["SQLALCHEMY_DATABASE_URI"] = uri
 db=SQLAlchemy(app)
