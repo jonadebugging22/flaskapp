@@ -10,7 +10,7 @@ app.config["SQLALCHEMY_DATABASE_URI"] = uri
 db=SQLAlchemy(app)
 
 class Student(db.Model):
-    __tablename__="students"
+    __tablename__="info"
     id = db.Column(db.Integer, primary_key=True)
     name= db.Column(db.String(50))
     email = db.Column(db.String(80))
