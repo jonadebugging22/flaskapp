@@ -7,14 +7,11 @@ app = Flask(__name__)
 pw= "ChangeMe#2026"
 uri= f"mysql+pymysql://jona:{pw}"
 uri+="@127.0.0.1/schooldb"
-pw= "jona123"
-uri= f"mysql+pymysql://appuser:{pw}"
-uri+="@127.0.0.1/practiceTable"
 app.config["SQLALCHEMY_DATABASE_URI"] = uri
 db=SQLAlchemy(app)
 
 class Student(db.Model):
-    __tablename__="info"
+    __tablename__="students"
     id = db.Column(db.Integer, primary_key=True)
     name= db.Column(db.String(50))
     email = db.Column(db.String(80))
@@ -40,6 +37,22 @@ def read_one(i):
     s = db.get_or_404(Student, i)
     return jsonify(s.to_dict())
 
+@app.route("/students/<int:i>", methods=["PUT"])
+def update(i):
+    s = db.get_or_404(Student, i)
+    d = request.get_json()
+    s.name, s.email = d["name"], d["email"]
+    db.session.commit()
+    return jsonify(s.to_dict())
+
+@app.route(
+"/students/<int:i>",
+methods=["DELETE"])
+def delete(i):
+    s = db.get_or_404(Student,i)
+    db.session.delete(s)
+    db.session.commit()
+    return "", 204
 
 @app.route("/")
 def home():
